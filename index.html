@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rosa Decor | Eventos com Elegância</title>
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #fce4ec;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- Foto de Capa --- */
+        .capa {
+            width: 100%;
+            height: 500px;
+            background-image: url('capa.jpeg'); /* Substitua pela sua imagem de alta resolução */
+            background-size: cover;
+            background-position: center 40%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .capa::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(244, 143, 177, 0.8), rgba(240, 98, 146, 0.6));
+        }
+
+        .capa-texto {
+            position: relative;
+            color: white;
+            max-width: 900px;
+            padding: 30px;
+            text-shadow: 2px 2px 15px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease;
+            z-index: 2;
+        }
+
+        .capa-texto h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            line-height: 1.1;
+        }
+
+        .capa-texto p {
+            font-size: 1.6rem;
+            font-weight: 300;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(0,0,0,0.2);
+            backdrop-filter: blur(4px);
+            padding: 12px 30px;
+            border-radius: 60px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* --- Galeria --- */
+        .galeria {
+            width: 100%;
+            max-width: 1300px;
+            padding: 70px 50px 50px;
+            margin: 0 auto;
+        }
+
+        /* Estilo para o texto da profissional com efeito vidro */
+        .sobre-profissional {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 60px;
+            padding: 25px 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .sobre-profissional p {
+            font-size: 1.5rem;
+            color: #4a1a2c;
+            font-weight: 400;
+            line-height: 1.6;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+        }
+
+        .sobre-profissional p i {
+            color: #f06292;
+            font-size: 1.8rem;
+            margin: 0 5px;
+        }
+
+        .galeria h2 {
+            font-size: 3rem;
+            color: #880e4f;
+            font-weight: 600;
+            margin-bottom: 40px;
+            display: inline-block;
+            border-bottom: 5px solid #f8bbd0;
+            padding-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .grid-galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+        }
+
+        .card-tema {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 35px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            padding: 20px;
+        }
+
+        .card-tema:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 50px rgba(240, 98, 146, 0.3), 0 0 0 2px #f48fb1 inset;
+        }
+
+        .info-tema {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .info-tema h3 {
+            font-size: 1.8rem;
+            color: #ad1457;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .info-tema p {
+            color: #4a4a4a;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        /* Miniaturas das fotos (até 5) */
+        .miniaturas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .miniaturas img {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .miniaturas img:hover {
+            transform: scale(1.05);
+            border-color: #f06292;
+            box-shadow: 0 8px 16px rgba(240, 98, 146, 0.3);
+        }
+
+        /* --- Modal (Lightbox) --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-conteudo {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 30px;
+            box-shadow: 0 0 30px rgba(255,255,255,0.3);
+            border: 3px solid white;
+        }
+
+        .fechar {
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            background: rgba(0,0,0,0.3);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fechar:hover {
+            color: #f06292;
+            transform: scale(1.1);
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* --- Seção de Orçamento --- */
+        .orcamento-section {
+            width: 100%;
+            max-width: 1200px;
+            margin: 30px auto 70px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 60px 50px;
+            border-radius: 80px;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.7) inset;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            border: 1px solid rgba(255, 215, 235, 0.9);
+        }
+
+        .mensagem-50 {
+            flex: 1 1 300px;
+        }
+
+        .mensagem-50 h3 {
+            font-size: 2.5rem;
+            color: #880e4f;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .mensagem-50 h3 i {
+            color: #f06292;
+            font-size: 2.8rem;
+        }
+
+        .mensagem-50 p {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 15px 25px;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .mensagem-50 p i {
+            color: #f06292;
+            font-size: 1.8rem;
+            width: 30px;
+        }
+
+        .botao-orcamento {
+            flex: 0 0 auto;
+        }
+
+        .btn-whatsapp {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #ad1457;
+            padding: 25px 55px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 2.2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 20px 40px rgba(240, 98, 146, 0.4), 0 0 0 2px rgba(255, 255, 255, 0.8) inset;
+            transition: 0.4s;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            letter-spacing: 1px;
+        }
+
+        .btn-whatsapp i {
+            font-size: 3rem;
+            color: #25D366;
+            filter: drop-shadow(0 0 8px rgba(37, 211, 102, 0.6));
+        }
+
+        .btn-whatsapp:hover {
+            transform: scale(1.08);
+            background: rgba(255, 255, 255, 0.35);
+            box-shadow: 0 30px 60px rgba(240, 98, 146, 0.6), 0 0 0 3px #ffffff inset;
+            color: #880e4f;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .capa {
+                height: 400px;
+            }
+            .capa-texto h1 {
+                font-size: 3.2rem;
+            }
+            .capa-texto p {
+                font-size: 1.3rem;
+                padding: 10px 20px;
+            }
+            .sobre-profissional {
+                padding: 20px 25px;
+            }
+            .sobre-profissional p {
+                font-size: 1.3rem;
+            }
+            .orcamento-section {
+                flex-direction: column;
+                text-align: center;
+                margin: 30px 20px;
+                padding: 40px 30px;
+            }
+            .mensagem-50 p {
+                justify-content: center;
+            }
+            .btn-whatsapp {
+                font-size: 1.8rem;
+                padding: 20px 40px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .galeria {
+                padding: 50px 20px;
+            }
+            .galeria h2 {
+                font-size: 2.2rem;
+            }
+            .capa-texto h1 {
+                font-size: 2.5rem;
+            }
+            .sobre-profissional p {
+                font-size: 1.1rem;
+            }
+            .btn-whatsapp {
+                font-size: 1.5rem;
+                padding: 18px 30px;
+            }
+            .miniaturas {
+                grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+            }
+            .miniaturas img {
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Foto de Capa com apresentação da profissional -->
+    <div class="capa">
+        <div class="capa-texto">
+            <!-- A capa pode conter título, mas conforme solicitado mantivemos vazio para o texto ficar na galeria -->
+        </div>
+    </div>
+
+    <!-- Galeria com miniaturas -->
+    <section class="galeria">
+        <!-- Texto da profissional com efeito vidro -->
+        <div class="sobre-profissional">
+            <p>✨Sou Rithielle, há 12 anos trabalho com decoração de festas. Ao longo dessa jornada tive o privilégio de fazer parte de muitos momentos especiais na vida das pessoas. cada festa que preparo carrega dedicação, criatividade e muito amor. Sou extremamente realizada por cada trabalho entregue, pois sei que, através da decoração, ajudo a transformar sonhos em memórias inesquecíveis.  ✨</p>
+        </div>
+
+        <h2>MEUS TRABALHOS</h2>
+        <div class="grid-galeria" id="galeriaContainer">
+            <!-- Os cards serão gerados dinamicamente via JavaScript para facilitar a edição -->
+        </div>
+    </section>
+
+    <!-- Modal para visualização das imagens -->
+    <div id="modal" class="modal" onclick="fecharModalFora(event)">
+        <span class="fechar" onclick="fecharModal()">&times;</span>
+        <img class="modal-conteudo" id="modal-img" src="" alt="Imagem ampliada">
+    </div>
+
+    <!-- Seção Orçamento -->
+    <div class="orcamento-section">
+        <div class="mensagem-50">
+            <h3>
+                <i class="fas fa-heart"></i> Faça seu orçamento
+            </h3>
+            <p>
+                <i class="fas fa-check-circle"></i> <strong>50% de entrada</strong> para garantir sua data
+            </p>
+            <p>
+                <i class="fas fa-calendar-alt"></i> Reserve com até 30 dias de antecedência
+            </p>
+            <p>
+                <i class="fas fa-gem"></i> Pacotes exclusivos com condições especiais
+            </p>
+        </div>
+        <div class="botao-orcamento">
+            <!-- Link do WhatsApp com número e mensagem pré-definida (substitua o número) -->
+            <a href="https://wa.me/5587991956088?text=Olá!%20Gostaria%20de%20fazer%20um%20orçamento%20com%20a%20profissional%20Rithy%20para%20meu%20evento." class="btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i> Quero um orçamento
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Dados dos temas com até 5 imagens cada (substitua pelos seus links)
+        const temas = [
+            {
+                nome: "Temas infantis",
+                descricao: "A festa dos seus sonhos, decorada com amor e exclusividade.",
+                imagens: [
+                    "imagem.jpeg",
+                    "pool.jpeg",
+                    "mundobita.jpeg",
+                    "batman.jpeg",
+                    "motogross.jpeg"
+                ]
+            },
+            {
+                nome: "Tema Batizado",
+                descricao: "Detalhes que encantam e celebram a vida",
+                imagens: [
+                    "bati.jpeg",
+                    "batiii.jpeg",
+                    "batiiii.jpeg",
+                ]
+            },
+            {
+                nome: "Tema 15 anos",
+                descricao: "transformando sonhos em cenários inesquecíveis para o seu aniversário.",
+                imagens: [
+                    "batii.jpeg",
+                    "batiiiiii.jpeg",
+                    "batiiiiiii.jpeg",
+                ]
+            },
+            {
+                nome: "outros Temas",
+                descricao: "Decoração personalizada; cada detalhe conta uma história.",
+                imagens: [
+                    "tem.jpeg",
+                    "tem2.jpeg",
+                    "tem3.jpeg",
+                    "tem4.jpeg",
+                    "tem5.jpeg"
+                ]
+            },
+            
+            
+        ];
+
+        // Função para criar os cards dinamicamente
+        function carregarGaleria() {
+            const container = document.getElementById('galeriaContainer');
+            container.innerHTML = ''; // Limpa o container
+
+            temas.forEach(tema => {
+                const card = document.createElement('div');
+                card.className = 'card-tema';
+
+                // Informações do tema
+                const infoDiv = document.createElement('div');
+                infoDiv.className = 'info-tema';
+                infoDiv.innerHTML = `<h3>${tema.nome}</h3><p>${tema.descricao}</p>`;
+                card.appendChild(infoDiv);
+
+                // Miniaturas
+                const miniaturasDiv = document.createElement('div');
+                miniaturasDiv.className = 'miniaturas';
+
+                tema.imagens.forEach(imgSrc => {
+                    const img = document.createElement('img');
+                    img.src = imgSrc;
+                    img.alt = tema.nome;
+                    img.onclick = () => abrirModal(imgSrc);
+                    miniaturasDiv.appendChild(img);
+                });
+
+                card.appendChild(miniaturasDiv);
+                container.appendChild(card);
+            });
+        }
+
+        // Funções do Modal
+        const modal = document.getElementById('modal');
+        const modalImg = document.getElementById('modal-img');
+
+        function abrirModal(src) {
+            modal.style.display = 'flex';
+            modalImg.src = src;
+        }
+
+        function fecharModal() {
+            modal.style.display = 'none';
+        }
+
+        function fecharModalFora(event) {
+            if (event.target === modal) {
+                fecharModal();
+            }
+        }
+
+        // Carregar a galeria ao iniciar
+        window.onload = carregarGaleria;
+    </script>
+</body>
+</html>
